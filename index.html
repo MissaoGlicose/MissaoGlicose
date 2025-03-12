@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Jogo Missão Glicose</title>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
   <style>
 	  
     body {
@@ -257,12 +260,17 @@ body {
   </div>
 	
 	 <!-- Modal -->
-  <div id="videoModal" class="modal">
+<div id="videoModal" class="modal">
     <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/EcwTvNQGxDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <span class="close" id="closeModal">&times;</span>
+        <iframe id="videoFrame" width="560" height="315" 
+            src="https://www.youtube.com/embed/EcwTvNQGxDk?enablejsapi=1" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
     </div>
-  </div>
+</div>
 	
 <style>
     .modal {
@@ -871,23 +879,28 @@ document.querySelectorAll("button").forEach(function(botao) {
   
    
 	  
-     // Abre o vídeo
-  document.getElementById("videoButton").addEventListener("click", function() {
-    document.getElementById("videoModal").style.display = "flex";
-  });
+      var player;
 
-  // Fecha o vídeo e para o som
-  document.getElementById("closeModal").addEventListener("click", function() {
-    document.getElementById("videoModal").style.display = "none";
-    var iframe = document.getElementById("videoFrame");
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('videoFrame', {
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
 
-    // Parar o vídeo, reinicializando o src
-    var src = iframe.src;
-    iframe.src = '';  // Limpar o src para parar o vídeo
-    iframe.src = src; // Restabelecer o src para reiniciar o vídeo
-	  
-  });
-  </script>
+  function onPlayerReady(event) {
+    document.getElementById("videoButton").addEventListener("click", function() {
+      document.getElementById("videoModal").style.display = "flex";
+      player.playVideo();
+    });
+
+    document.getElementById("closeModal").addEventListener("click", function() {
+      document.getElementById("videoModal").style.display = "none";
+      player.pauseVideo(); // Pausa o vídeo corretamente
+    });
+  }
+</script>
 
 
 </body>
