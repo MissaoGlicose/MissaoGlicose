@@ -263,12 +263,14 @@ body {
 <div id="videoModal" class="modal">
     <div class="modal-content">
         <span class="close" id="closeModal">&times;</span>
-        <iframe id="videoFrame" width="560" height="315" 
-            src="https://www.youtube.com/embed/EcwTvNQGxDk?enablejsapi=1" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-        </iframe>
+        <div id="videoContainer">
+            <iframe id="videoFrame" width="560" height="315" 
+                src="https://www.youtube.com/embed/EcwTvNQGxDk?enablejsapi=1" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+        </div>
     </div>
 </div>
 	
@@ -879,24 +881,30 @@ document.querySelectorAll("button").forEach(function(botao) {
   
    
 	  
-      var player;
-
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('videoFrame');
-    }
-
-    document.getElementById("videoButton").addEventListener("click", function() {
+  document.getElementById("videoButton").addEventListener("click", function() {
         document.getElementById("videoModal").style.display = "flex";
-        if (player) {
-            player.playVideo();
-        }
     });
 
     document.getElementById("closeModal").addEventListener("click", function() {
         document.getElementById("videoModal").style.display = "none";
-        if (player) {
-            player.stopVideo(); // Para o vídeo completamente
-        }
+
+        // Remove o iframe
+        let videoContainer = document.getElementById("videoContainer");
+        videoContainer.innerHTML = "";
+
+        // Recria o iframe para parar o som
+        let newIframe = document.createElement("iframe");
+        newIframe.id = "videoFrame";
+        newIframe.width = "560";
+        newIframe.height = "315";
+        newIframe.src = "https://www.youtube.com/embed/EcwTvNQGxDk?enablejsapi=1";
+        newIframe.title = "YouTube video player";
+        newIframe.frameBorder = "0";
+        newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        newIframe.referrerPolicy = "strict-origin-when-cross-origin";
+        newIframe.allowFullscreen = true;
+
+        videoContainer.appendChild(newIframe);
     });
 </script>
 
