@@ -227,6 +227,7 @@ body {
             left: 50%;
             transform: translateX(-50%);
         }
+	  
 
 	  @media (max-width: 768px) {
     #Coelho1, #diabetesImage, #Femino, #Masculino {
@@ -252,19 +253,67 @@ body {
   <div id="menu" class="game-container">
     <h1>Bem-vindo á Missão Glicose!</h1>
     <button id="startButton">Começar o Jogo</button>
+	<button id="videoButton">Ver Vídeo</button>
   </div>
 	
-<audio id="som" src="mouseclick.mp3" preload="auto"></audio>
-<audio id="somPontuacao" src="som_pontuacao.mp3" preload="auto"></audio>
+	 <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <video id="gameVideo" width="640" height="360" controls>
+        <source src="E:\PRONTO- PT-PT.mp4" type="video/mp4">
+        O teu navegador não suporta vídeos.
+      </video>
+    </div>
+  </div>
+	
+<style>
+    .modal {
+      display: none; /* Modal começa oculta */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: black;
+      padding: 20px;
+      border-radius: 10px;
+      position: relative;
+    }
+     .close {
+      position: absolute;
+      top: 10px;
+      right: 5px; /* Ajustado para mais perto do canto */
+      font-size: 40px; /* Aumenta o tamanho da fonte */
+      cursor: pointer;
+      padding: 5px; /* Aumenta o tamanho da área clicável */
+      color: #333; /* Cor do ícone */
+      background-color: transparent;
+      border: none;
+      border-radius: 50%; /* Deixa o botão redondo */
+    }
+    .close:hover {
+      color: #f00; /* Altera a cor ao passar o mouse */
+    }
+  </style>
+	
+<audio id="som" src="E:\PAP\sons/mouseclick.mp3" preload="auto"></audio>
+<audio id="somPontuacao" src="E:\PAP\sons/som_pontuacao.mp3" preload="auto"></audio>
 	
 <!--- IMAGENS POR AQUI -->
-<img id="diabetesImage" src="Diabetes2.png" alt="Foto" style="width: 500px; height: auto; position: absolute; top: 65px; left: 700px;">
-<img id="Coelho1" class="personagem" src="DUVIDA.png" alt="personagem" style="width: 500px; height: auto; position: absolute; top: 600px; left: 1400px;">
-<img id="Femino" class="personagem" src="3.png" alt="personagem" style="width: 200px; height: auto; position: absolute; top: 500px; right: 1500px;">
-<img id="Masculino" class="personagem" src="normal2.png" alt="personagem" style="width: 200px; height: auto; position: absolute; top: 100px; right: 1500px;">
-<img id="Nuvem" class="nuvem" src="nuvens4.png" alt="nuvem" style="width: 1900px; height: auto; position: absolute; top:-350px; center: 1200px;">
-<img id="Nuvem" class="nuvem" src="gota de sangue.png" alt="nuvem" style="width: 200px; height: auto; position: absolute; top: 600px; right: 300px;">
-<img id="Nuvem" class="nuvem" src="gota de sangue.png" alt="nuvem" style="width: 200px; height: auto; position: absolute; top: 50px; right: 1500px;">
+<img id="diabetesImage" src="E:\PAP\Imagens/Diabetes2.png" alt="Foto" style="width: 500px; height: auto; position: absolute; top: 65px; left: 700px;">
+<img id="Coelho1" class="personagem" src="E:\PAP\Personagens\Dr.Glicorapido/DUVIDA.png" alt="personagem" style="width: 500px; height: auto; position: absolute; top: 600px; left: 1400px;">
+<img id="Femino" class="personagem" src="E:\PAP\Personagens\Feminino/3.png" alt="personagem" style="width: 200px; height: auto; position: absolute; top: 500px; right: 1500px;">
+<img id="Masculino" class="personagem" src="E:\PAP\Personagens\Masculino/normal2.png" alt="personagem" style="width: 200px; height: auto; position: absolute; top: 100px; right: 1500px;">
+<img id="Nuvem" class="nuvem" src="E:\PAP\Imagens\nuvens4.png" alt="nuvem" style="width: 1900px; height: auto; position: absolute; top:-350px; center: 1200px;">
+<img id="Nuvem" class="nuvem" src="E:\PAP\Imagens\gota de sangue.png" alt="nuvem" style="width: 200px; height: auto; position: absolute; top: 600px; right: 300px;">
+<img id="Nuvem" class="nuvem" src="E:\PAP\Imagens\gota de sangue.png" alt="nuvem" style="width: 200px; height: auto; position: absolute; top: 50px; right: 1500px;">
 	
 <!-- IMAGENS EM CIMA -->
 	
@@ -821,6 +870,25 @@ document.querySelectorAll("button").forEach(function(botao) {
 
 
     document.getElementById("startButton").onclick = startGame;
+  
+   
+	  
+	   // Garante que o vídeo não abre ao carregar a página
+    window.onload = function() {
+      document.getElementById("videoModal").style.display = "none"; // Garante que a modal começa escondida
+    };
+
+    // Exibe o modal quando clicar no botão
+    document.getElementById("videoButton").addEventListener("click", function() {
+      document.getElementById("videoModal").style.display = "flex"; // Exibe a modal
+      document.getElementById("gameVideo").play(); // Começa o vídeo
+    });
+
+    // Fecha o modal quando clicar no botão de fechar
+    document.getElementById("closeModal").addEventListener("click", function() {
+      document.getElementById("videoModal").style.display = "none"; // Esconde a modal
+      document.getElementById("gameVideo").pause(); // Pausa o vídeo
+    });
   </script>
 
 </body>
