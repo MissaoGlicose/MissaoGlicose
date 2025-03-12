@@ -881,25 +881,23 @@ document.querySelectorAll("button").forEach(function(botao) {
 	  
       var player;
 
-  function onYouTubeIframeAPIReady() {
-    player = new YT.Player('videoFrame', {
-      events: {
-        'onReady': onPlayerReady
-      }
-    });
-  }
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('videoFrame');
+    }
 
-  function onPlayerReady(event) {
     document.getElementById("videoButton").addEventListener("click", function() {
-      document.getElementById("videoModal").style.display = "flex";
-      player.playVideo();
+        document.getElementById("videoModal").style.display = "flex";
+        if (player) {
+            player.playVideo();
+        }
     });
 
     document.getElementById("closeModal").addEventListener("click", function() {
-      document.getElementById("videoModal").style.display = "none";
-      player.pauseVideo(); // Pausa o vídeo corretamente
+        document.getElementById("videoModal").style.display = "none";
+        if (player) {
+            player.stopVideo(); // Para o vídeo completamente
+        }
     });
-  }
 </script>
 
 
