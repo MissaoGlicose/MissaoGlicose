@@ -260,7 +260,7 @@ body {
   <div id="videoModal" class="modal">
     <div class="modal-content">
       <span class="close" id="closeModal">&times;</span>
-      <div id="videoPlayer"></div> <!-- Este é o contêiner onde o vídeo será carregado -->
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/EcwTvNQGxDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 	
@@ -871,49 +871,24 @@ document.querySelectorAll("button").forEach(function(botao) {
   
    
 	  
-// Variável global para armazenar a instância do player
-    let player;
+    var videoModal = document.getElementById("videoModal");
+    var videoButton = document.getElementById("videoButton");
+    var closeModal = document.getElementById("closeModal");
+    var videoContainer = document.getElementById("videoContainer");
 
-    // Função chamada pela YouTube Iframe API quando a API está pronta
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('videoPlayer', {
-        height: '315',
-        width: '560',
-        videoId: 'EcwTvNQGxDk', // ID do vídeo do YouTube
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      });
-    }
+    var videoId = "EcwTvNQGxDk"; // ID do vídeo que vais querer carregar
 
-    // Função chamada quando o player está pronto
-    function onPlayerReady(event) {
-      // O vídeo estará pronto para ser controlado quando o player estiver pronto
-    }
-
-    // Função chamada quando o estado do player muda
-    function onPlayerStateChange(event) {
-      // Verifica o estado do vídeo (pode ser usado para outras ações, se necessário)
-    }
-
-    window.onload = function() {
-      document.getElementById("videoModal").style.display = "none"; // Garante que a modal começa escondida
-    };
-
-    // Exibe o modal e começa o vídeo
-    document.getElementById("videoButton").addEventListener("click", function() {
-      document.getElementById("videoModal").style.display = "flex"; // Exibe a modal
-      player.playVideo(); // Inicia o vídeo
+    videoButton.addEventListener("click", function() {
+      videoModal.style.display = "flex"; // Exibir o modal
+      videoContainer.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
     });
 
-    // Fecha o modal e pausa o vídeo
-    document.getElementById("closeModal").addEventListener("click", function() {
-      document.getElementById("videoModal").style.display = "none"; // Esconde a modal
-      player.pauseVideo(); // Pausa o vídeo
+    closeModal.addEventListener("click", function() {
+      videoModal.style.display = "none"; // Fechar o modal
+      videoContainer.innerHTML = ''; // Remover o iframe (video para de tocar)
     });
   </script>
-  
+
 
 </body>
 </html>
