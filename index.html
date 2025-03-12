@@ -871,21 +871,18 @@ document.querySelectorAll("button").forEach(function(botao) {
   
    
 	  
-	   // Garante que o vídeo não abre ao carregar a página
-    window.onload = function() {
+	   window.onload = function() {
       document.getElementById("videoModal").style.display = "none"; // Garante que a modal começa escondida
     };
 
     // Exibe o modal quando clicar no botão
     document.getElementById("videoButton").addEventListener("click", function() {
       document.getElementById("videoModal").style.display = "flex"; // Exibe a modal
-      document.getElementById("gameVideo").play(); // Começa o vídeo
     });
 
     // Fecha o modal quando clicar no botão de fechar
     document.getElementById("closeModal").addEventListener("click", function() {
       document.getElementById("videoModal").style.display = "none"; // Esconde a modal
-      document.getElementById("gameVideo").pause(); // Pausa o vídeo
     });
   </script>
 
