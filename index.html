@@ -887,20 +887,6 @@ document.querySelectorAll("button").forEach(function(botao) {
       videoModal.style.display = "none"; // Fechar o modal
       videoContainer.innerHTML = ''; // Remover o iframe (video para de tocar)
     });
-
-
-
-	   document.getElementById("videoButton").addEventListener("click", function() {
-    document.getElementById("videoModal").style.display = "flex";
-  });
-
-  document.getElementById("closeModal").addEventListener("click", function() {
-    document.getElementById("videoModal").style.display = "none";
-    var iframe = document.getElementById("videoFrame");
-    var src = iframe.src;
-    iframe.src = ""; // Remove a URL para parar o vídeo
-    iframe.src = src; // Restaura a URL para garantir que o vídeo pára de tocar
-  });
   </script>
 
 
