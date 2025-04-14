@@ -256,23 +256,7 @@ body {
   <div id="menu" class="game-container">
     <h1>Bem-vindo á Missão Glicose!</h1>
     <button id="startButton">Começar o Jogo</button>
-	<button id="videoButton">Ver Vídeo</button>
   </div>
-	
-	 <!-- Modal -->
-<div id="videoModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <div id="videoContainer">
-            <iframe id="videoFrame" width="560" height="315" 
-                src="https://www.youtube.com/embed/4Hfh6D0GuLc?si=GrRMf97ptLXoK4ub" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-            </iframe>
-        </div>
-    </div>
-</div>
 
 	
 <style>
@@ -909,49 +893,13 @@ function shuffleArray(array) {
         `;
     }
 }
-	    
-	// Função para tocar o som
-function tocarSom() {
-    var som = document.getElementById("som");
-    som.currentTime = 0; // Recomeça o som sempre que for tocado
-    som.play();  // Toca o som
-}
-
-// Adiciona o evento de clique a todos os botões do jogo
-document.querySelectorAll("button").forEach(function(botao) {
-    botao.addEventListener("click", tocarSom);
-});
 
 
     document.getElementById("startButton").onclick = startGame;
   
    
 	  
-  document.getElementById("videoButton").addEventListener("click", function() {
-        document.getElementById("videoModal").style.display = "flex";
-    });
-
-    document.getElementById("closeModal").addEventListener("click", function() {
-        document.getElementById("videoModal").style.display = "none";
-
-        // Remove o iframe
-        let videoContainer = document.getElementById("videoContainer");
-        videoContainer.innerHTML = "";
-
-        // Recria o iframe para parar o som
-        let newIframe = document.createElement("iframe");
-        newIframe.id = "videoFrame";
-        newIframe.width = "560";
-        newIframe.height = "315";
-        newIframe.src = "https://www.youtube.com/embed/4Hfh6D0GuLc?si=GrRMf97ptLXoK4ub";
-        newIframe.title = "YouTube video player";
-        newIframe.frameBorder = "0";
-        newIframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-        newIframe.referrerPolicy = "strict-origin-when-cross-origin";
-        newIframe.allowFullscreen = true;
-
-        videoContainer.appendChild(newIframe);
-    });
+  
 </script>
 
 
